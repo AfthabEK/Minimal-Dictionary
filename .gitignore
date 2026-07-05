@@ -1,0 +1,12 @@
+# Python
+venv/
+__pycache__/
+
+# Large source dumps and generated data (rebuildable via README pipeline)
+parser/enwiktionary.xml
+parser/kaikki-english.jsonl.gz
+parser/*.jsonl
+parser/*.db
+
+# Old-approach intermediates / scratch samples
+parser/sample_100_engluish_only_pretty.json

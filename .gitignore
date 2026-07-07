@@ -7,6 +7,7 @@ parser/enwiktionary.xml
 parser/kaikki-english.jsonl.gz
 parser/*.jsonl
 parser/*.db
+parser/*.db.gz
 
 # Old-approach intermediates / scratch samples
 parser/sample_100_engluish_only_pretty.json

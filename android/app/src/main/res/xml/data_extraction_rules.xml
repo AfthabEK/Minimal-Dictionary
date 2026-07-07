@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   The dictionary database (~276 MB) is far over the 25 MB backup quota and
+   is re-downloadable on first run, so it is excluded from backup/transfer.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="database" path="dictionary.db" />
+        <exclude domain="database" path="dictionary.db.tmp" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" path="dictionary.db" />
+        <exclude domain="database" path="dictionary.db.tmp" />
+    </device-transfer>
+</data-extraction-rules>

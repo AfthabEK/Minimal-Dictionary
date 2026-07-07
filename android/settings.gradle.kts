@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Simple Dictionary"
+rootProject.name = "Minimal Dictionary"
 include(":app")

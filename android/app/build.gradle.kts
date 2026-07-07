@@ -1,10 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
 
+// Release signing comes from android/keystore.properties (gitignored);
+// machines without it can still build an unsigned release.
+val keystoreProperties = Properties().apply {
+    val file = rootProject.file("keystore.properties")
+    if (file.exists()) file.inputStream().use { load(it) }
+}
+
 android {
-    namespace = "com.example.simpledictionary"
+    namespace = "io.github.afthabek.minimaldictionary"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.simpledictionary"
+        applicationId = "io.github.afthabek.minimaldictionary"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -21,10 +30,24 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        if (keystoreProperties.isNotEmpty()) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
             optimization {
-                enable = false
+                enable = true
+            }
+            if (keystoreProperties.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
             }
         }
     }
